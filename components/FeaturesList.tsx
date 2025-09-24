@@ -41,8 +41,8 @@ const FeaturesList: React.FC = () => {
             </div>
 
             <div className="mt-12 flex flex-row gap-4 flex-wrap sm:flex-nowrap">
-              <a href="#" className="inline-block bg-[#583a1e] text-white font-bold py-4 px-6 sm:px-8 rounded-lg text-base sm:text-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider whitespace-nowrap">Get in touch</a>
-              <a href="#" className="inline-block border border-white text-gray-800 font-bold py-4 px-6 sm:px-8 rounded-lg text-base sm:text-lg hover:bg-white hover:text-tn-primary transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider whitespace-nowrap">Learn more about us</a>
+              <a href="#" className="inline-block bg-[#583a1e] text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider whitespace-nowrap">Get in touch</a>
+              <a href="#" className="inline-block border border-white text-gray-800 font-bold py-4 px-10 rounded-lg text-lg hover:bg-white hover:text-black transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider whitespace-nowrap">Learn more about us</a>
             </div>
           </div>
         </div>

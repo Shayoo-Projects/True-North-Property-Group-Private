@@ -129,7 +129,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, videoSrc }) => {
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('sellers'); }}
-              className="inline-block border border-white text-white font-bold py-4 px-10 rounded-lg text-lg hover:bg-white hover:text-tn-primary transform hover:scale-105 transition-all duration-300 shadow-lg"
+              className="inline-block border border-white text-white font-bold py-4 px-10 rounded-lg text-lg hover:bg-white hover:text-[#00a0b0] transform hover:scale-105 transition-all duration-300 shadow-lg"
             >
               Sellers
             </a>

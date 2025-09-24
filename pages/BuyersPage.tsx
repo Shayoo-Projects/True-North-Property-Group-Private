@@ -7,7 +7,7 @@ const BuyerHeader: React.FC = () => (
     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-          Buy a Home in <span className="text-tn-secondary">VA/SC</span>
+          Buy a Home in <span className="text-[#00a0b0]">VA/DC/MD</span>
         </h1>
         <p className="mt-6 text-xl text-gray-200 max-w-3xl mx-auto">
           Your journey to homeownership starts here. Let us guide you every step of the way.

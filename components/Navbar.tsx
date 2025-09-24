@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import logo from '../media/logo.jpg';
 
 interface NavbarProps {
@@ -8,6 +8,22 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  // Timer to delay closing of the Resources submenu so it doesn't disappear
+  const closeTimerRef = useRef<number | null>(null);
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const scheduleClose = (delay = 250) => {
+    clearCloseTimer();
+    closeTimerRef.current = window.setTimeout(() => {
+      setIsResourcesOpen(false);
+    }, delay);
+  };
   const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
 
   const mainLinks = [
@@ -48,7 +64,11 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   {link.name}
                 </a>
               ))}
-              <div className="relative" onMouseEnter={() => setIsResourcesOpen(true)} onMouseLeave={() => setIsResourcesOpen(false)}>
+              <div
+                className="relative"
+                onMouseEnter={() => { clearCloseTimer(); setIsResourcesOpen(true); }}
+                onMouseLeave={() => scheduleClose(250)}
+              >
                 <button
                   type="button"
                   className="text-gray-600 hover:bg-[#583a1e] hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 flex items-center"
@@ -61,7 +81,13 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   </svg>
                 </button>
                 {isResourcesOpen && (
-                  <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical">
+                  <div
+                    className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu"
+                    aria-orientation="vertical"
+                    onMouseEnter={clearCloseTimer}
+                    onMouseLeave={() => scheduleClose(200)}
+                  >
                     <div className="py-1" role="none">
                       {resourceLinks.map((link) => (
                          <a key={link.name} href="#" onClick={(e) => {e.preventDefault(); handleNavigate(link.page);}} className="text-gray-700 hover:bg-[#583a1e] hover:text-white block px-4 py-2 text-sm" role="menuitem">
@@ -72,7 +98,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   </div>
                 )}
               </div>
-              <a href="#" onClick={(e) => {e.preventDefault(); handleNavigate('contact');}} className="text-gray-600 hover:bg-[#583a1e] hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">
+              <a href="#" onClick={(e) => {e.preventDefault(); handleNavigate('contact');}} className="bg-[#583a1e] text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:opacity-90">
                 Contact
               </a>
             </div>
@@ -113,7 +139,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                 </div>
               )}
             </div>
-             <a href="#" onClick={(e) => {e.preventDefault(); handleNavigate('contact');}} className="text-gray-600 hover:bg-[#583a1e] hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300">
+             <a href="#" onClick={(e) => {e.preventDefault(); handleNavigate('contact');}} className="bg-[#583a1e] text-white block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 hover:opacity-90">
               Contact
             </a>
           </div>

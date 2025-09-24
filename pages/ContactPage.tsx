@@ -34,7 +34,7 @@ const ContactInfo: React.FC = () => {
                                 <PhoneIcon />
                             </div>
                             <div className="ml-3 text-base text-gray-500">
-                                <p>+1 (555) 123-4567</p>
+                                <p>(301) 445-1395</p>
                             </div>
                         </div>
                         <div className="mt-6 flex">
@@ -42,7 +42,7 @@ const ContactInfo: React.FC = () => {
                                 <MailIcon />
                             </div>
                             <div className="ml-3 text-base text-gray-500">
-                                <p>contact@truenorthpg.com</p>
+                                <p>contact@tnorthdmv.com</p>
                             </div>
                         </div>
                          <div className="mt-6 flex">
@@ -50,7 +50,8 @@ const ContactInfo: React.FC = () => {
                                <LocationIcon />
                             </div>
                             <div className="ml-3 text-base text-gray-500">
-                                <p>123 Real Estate Ave, Arlington, VA 22201</p>
+                                <p>4391 Ridgewood Center Dr,<br />
+                                Woodbridge, VA 22192</p>
                             </div>
                         </div>
                     </div>
