@@ -54,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           <div className="flex items-center">
             <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="flex-shrink-0 flex items-center space-x-2">
               <img src={logo} alt="True North Property Group" className="h-10 w-auto" />
-              <span className="font-bold text-xl text-black">True North Property Group</span>
+              <span className="hidden md:inline font-bold text-xl text-black">True North Property Group</span>
             </a>
           </div>
           <div className="hidden md:block">
@@ -104,7 +104,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             </div>
           </div>
           <div className="md:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)} type="button" className="inline-flex items-center justify-center p-2 rounded-md text-tn-primary hover:text-white hover:bg-tn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded={isOpen}>
+            <button onClick={() => setIsOpen(!isOpen)} type="button" className="inline-flex items-center justify-center p-2 rounded-md text-black border-2 border-black hover:text-white hover:bg-[#583a1e] hover:border-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded={isOpen}>
               <span className="sr-only">Open main menu</span>
               <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 {isOpen ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />}
