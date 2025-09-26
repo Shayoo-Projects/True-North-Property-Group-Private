@@ -1,9 +1,9 @@
 
 import React from 'react';
-import Hero from '../components/Hero';
-import OurStory from '../components/OurStory';
-import OurExpertise from '../components/OurExpertise';
-import FeaturesList from '../components/FeaturesList';
+import Hero from '../components/home/Hero';
+import OurStory from '../components/home/OurStory';
+import OurExpertise from '../components/home/OurExpertise';
+import ContactUs from '../components/home/ContactUs';
 interface HomePageProps {
   onNavigate?: (page: string) => void;
 }
@@ -14,7 +14,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <Hero onNavigate={onNavigate} />
       <OurStory />
       <OurExpertise />
-      <FeaturesList />
+      <ContactUs />
     </>
   );
 };

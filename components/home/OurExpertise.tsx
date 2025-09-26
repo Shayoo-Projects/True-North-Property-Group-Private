@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import resultsBG from '../media/resultsBG.jpg';
+import resultsBG from '../../media/resultsBG.jpg';
 
 const OurExpertise: React.FC = () => {
   const testimonials = [
@@ -51,11 +51,23 @@ const OurExpertise: React.FC = () => {
             <h2 className="mt-2 text-3xl font-extrabold text-black sm:text-4xl">Results You Can Trust</h2>
           </div>
           
-          <div className="mt-6">
-          <blockquote className="text-xl text-gray-700 leading-relaxed">
-            “{t.quote}”
-          </blockquote>
-          <p className="mt-6 text-center font-semibold text-gray-900">— {t.author}</p>
+          {/* Mobile: clamped and smaller text to fit without long scrolling */}
+          <div className="mt-6 md:hidden">
+            <blockquote
+              className="text-base text-gray-700 leading-relaxed"
+              style={{ display: '-webkit-box', WebkitLineClamp: 6 as any, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+            >
+              “{t.quote}”
+            </blockquote>
+            <p className="mt-4 text-center font-semibold text-gray-900">— {t.author}</p>
+          </div>
+
+          {/* Tablet/Desktop: full text */}
+          <div className="mt-6 hidden md:block">
+            <blockquote className="text-xl text-gray-700 leading-relaxed">
+              “{t.quote}”
+            </blockquote>
+            <p className="mt-6 text-center font-semibold text-gray-900">— {t.author}</p>
           </div>
 
           {/* Controls */}

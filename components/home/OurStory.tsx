@@ -1,6 +1,6 @@
 
 import React from 'react';
-import whoWeAre from '../media/whoweare.jpg';
+import whoWeAre from '../../media/whoweare.jpg';
 
 const OurStory: React.FC = () => {
   return (
@@ -20,8 +20,8 @@ const OurStory: React.FC = () => {
             </p>
           </div>
 
-          {/* Right: Image */}
-          <div className="w-full">
+          {/* Right: Image (hidden on mobile) */}
+          <div className="w-full hidden md:block">
             <img src={whoWeAre} alt="Who we are at True North Property Group" className="w-full h-auto rounded-lg shadow-md object-cover" />
           </div>
         </div>

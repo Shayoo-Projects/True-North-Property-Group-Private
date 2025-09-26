@@ -1,12 +1,12 @@
 
 import React, { useEffect, useState } from 'react';
-import IMG1 from '../media/IMG_1.jpg';
-import IMG2 from '../media/IMG_2.jpg';
-import IMG3 from '../media/IMG_3.jpeg';
-import IMG4 from '../media/IMG_4.jpeg';
-import IMG5 from '../media/IMG_5.jpg';
+import IMG1 from '../../media/IMG_1.jpg';
+import IMG2 from '../../media/IMG_2.jpg';
+import IMG3 from '../../media/IMG_3.jpeg';
+import IMG4 from '../../media/IMG_4.jpeg';
+import IMG5 from '../../media/IMG_5.jpg';
 
-const FeaturesList: React.FC = () => {
+const ContactUs: React.FC = () => {
   const images = [IMG1, IMG2, IMG3, IMG4, IMG5];
   const [current, setCurrent] = useState(0);
 
@@ -40,9 +40,9 @@ const FeaturesList: React.FC = () => {
               <h2 className="mt-2 text-3xl font-extrabold text-black sm:text-4xl">Leading You Home <br></br> with Trust and Care.</h2>
             </div>
 
-            <div className="mt-12 flex flex-row gap-4 flex-wrap sm:flex-nowrap">
-              <a href="#" className="inline-block bg-[#583a1e] text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider whitespace-nowrap">Get in touch</a>
-              <a href="#" className="inline-block border border-white text-gray-800 font-bold py-4 px-10 rounded-lg text-lg hover:bg-white hover:text-black transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider whitespace-nowrap">Learn more about us</a>
+            <div className="mt-12 flex flex-col sm:flex-row gap-4">
+              <a href="#" className="inline-block bg-[#583a1e] text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider text-center w-full sm:w-auto">Get in touch</a>
+              <a href="#" className="inline-block border border-white text-gray-800 font-bold py-4 px-10 rounded-lg text-lg hover:bg-white hover:text-black transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider text-center w-full sm:w-auto">Learn more</a>
             </div>
           </div>
         </div>
@@ -51,4 +51,4 @@ const FeaturesList: React.FC = () => {
   );
 };
 
-export default FeaturesList;
+export default ContactUs;

@@ -10,13 +10,14 @@ import BlogPage from './pages/BlogPage';
 import MortgageCalculatorPage from './pages/MortgageCalculatorPage';
 import ContactPage from './pages/ContactPage';
 import FinancialAssessmentPage from './pages/FinancialAssessmentPage';
+import ClosingCostEstimator from './pages/ClosingCostEstimator';
 
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('home');
 
   const handleNavigate = (page: string) => {
-    const validPages = ['home', 'buyers', 'sellers', 'join', 'about', 'blog', 'mortgage-calculator', 'contact', 'financial-assessment'];
+    const validPages = ['home', 'buyers', 'sellers', 'join', 'about', 'blog', 'mortgage-calculator', 'closing-cost-estimator', 'contact', 'financial-assessment'];
     if (validPages.includes(page)) {
         window.scrollTo(0, 0); // Scroll to top on page change
         setCurrentPage(page);
@@ -37,6 +38,8 @@ const App: React.FC = () => {
         return <BlogPage />;
       case 'mortgage-calculator':
         return <MortgageCalculatorPage />;
+      case 'closing-cost-estimator':
+        return <ClosingCostEstimator />;
       case 'financial-assessment':
         return <FinancialAssessmentPage />;
       case 'contact':
