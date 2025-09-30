@@ -1,9 +1,11 @@
 import React from 'react';
+import TonyProfileImg from '../../media/tony_Profile.jpg';
+import BrandonProfileImg from '../../media/brandon_profile.jpg';
 
 const TeamSection: React.FC = () => {
     const teamMembers = [
-        { name: "Tony Smith", title: "Licensed in Virginia and Washington, D.C. and is a certified military relocation professional", imageUrl: "/media/tony_profile.jpg" },
-        { name: "Brandon Smith", title: "Licensed in Virginia and is a member of the National Association of Realtors and Northern Virginia Association of Realtors.", imageUrl: "/media/brandon_profile.jpg" },
+        { name: "Tony Smith", title: "Licensed in Virginia and Washington, D.C. and is a certified military relocation professional", imageUrl: TonyProfileImg },
+        { name: "Brandon Smith", title: "Licensed in Virginia and is a member of the National Association of Realtors and Northern Virginia Association of Realtors.", imageUrl: BrandonProfileImg },
     ];
     return (
         <section className="py-20 bg-tn-light">

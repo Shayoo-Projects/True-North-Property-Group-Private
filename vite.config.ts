@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => {
         // Support for React Router history API
         historyApiFallback: true,
       },
+      publicDir: 'public',
       plugins: [react()],
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
