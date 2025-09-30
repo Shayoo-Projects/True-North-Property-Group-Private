@@ -29,7 +29,7 @@ const App: React.FC = () => {
       case 'buyers':
         return <BuyersPage />;
       case 'sellers':
-        return <SellersPage />;
+        return <SellersPage onNavigate={handleNavigate} />;
       case 'join':
         return <JoinTeamPage />;
       case 'about':
