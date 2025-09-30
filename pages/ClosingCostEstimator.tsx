@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { PageHeader } from '../components/Header';
+import ResourcesHeaderImg from '../media/ResourcesHeader.jpg';
 
 const ClosingCostEstimator: React.FC = () => {
   // Inputs
@@ -54,7 +55,7 @@ const ClosingCostEstimator: React.FC = () => {
   return (
     <>
       <PageHeader
-        backgroundImage="/media/ResourcesHeader.jpg"
+        backgroundImage={ResourcesHeaderImg}
         title={<>Closing Cost <span className="text-[#00a0b0]">Estimator</span></>}
         subtitle="Estimate your closing costs and see an approximate cash-to-close based on your purchase details."
       />

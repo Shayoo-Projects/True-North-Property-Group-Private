@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PageHeader } from '../components/Header';
+import ResourcesHeaderImg from '../media/ResourcesHeader.jpg';
 
 const FinancialAssessmentPage: React.FC = () => {
     const [income, setIncome] = useState<number | undefined>(undefined);
@@ -77,7 +78,7 @@ const FinancialAssessmentPage: React.FC = () => {
     return (
         <>
             <PageHeader
-                backgroundImage="/media/ResourcesHeader.jpg"
+                backgroundImage={ResourcesHeaderImg}
                 title={<>Financial <span className="text-[#00a0b0]">Assessment</span></>}
                 subtitle="Understand your debt-to-income ratio and estimate what you can comfortably afford."
             />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PageHeader } from '../components/Header';
+import ResourcesHeaderImg from '../media/ResourcesHeader.jpg';
 
 const MortgageCalculatorPage: React.FC = () => {
   const [homePrice, setHomePrice] = useState<number | undefined>(undefined);
@@ -50,7 +51,7 @@ const MortgageCalculatorPage: React.FC = () => {
   return (
     <>
         <PageHeader
-            backgroundImage="/media/ResourcesHeader.jpg"
+            backgroundImage={ResourcesHeaderImg}
             title={<>Mortgage <span className="text-[#00a0b0]">Calculator</span></>}
             subtitle="Estimate your monthly mortgage payment and discover your buying power."
         />

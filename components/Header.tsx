@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface HeaderProps {
-  backgroundImage: string; // Now required, no longer optional
+  backgroundImage: string; // URL or imported image
   title: React.ReactNode;
   subtitle: string;
 }
