@@ -5,6 +5,15 @@ declare module '*.mp4' {
   export default src;
 }
 
+// Environment variables type declarations
+interface ImportMetaEnv {
+  readonly VITE_WEBHOOK_URL: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
 declare module '*.jpg' {
   const src: string;
   export default src;

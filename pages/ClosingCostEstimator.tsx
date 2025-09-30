@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { PageHeader } from '../components/Header';
 
 const ClosingCostEstimator: React.FC = () => {
   // Inputs
@@ -33,29 +34,23 @@ const ClosingCostEstimator: React.FC = () => {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-tn-primary py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Closing Cost <span className="text-tn-secondary">Estimator</span>
-          </h1>
-          <p className="mt-6 text-xl text-gray-200 max-w-3xl mx-auto">
-            Estimate your closing costs and see an approximate cash-to-close based on your purchase details.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        backgroundImage="/media/ResourcesHeader.jpg"
+        title={<>Closing Cost <span className="text-[#00a0b0]">Estimator</span></>}
+        subtitle="Estimate your closing costs and see an approximate cash-to-close based on your purchase details."
+      />
 
       {/* Tool */}
-      <section className="py-20 bg-tn-light">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             {/* Left: Inputs */}
             <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h2 className="text-2xl font-bold text-tn-primary mb-6">Enter Details</h2>
+              <h2 className="text-2xl font-bold text-[#00a0b0] mb-6">Enter Details</h2>
               <form className="space-y-5">
                 <div>
                   <label htmlFor="purchasePrice" className="block text-sm font-medium text-gray-700">Purchase Price</label>
-                  <input id="purchasePrice" type="number" value={purchasePrice} onChange={(e) => setPurchasePrice(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                  <input id="purchasePrice" type="number" value={purchasePrice} onChange={(e) => setPurchasePrice(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                 </div>
                 <div>
                   <label htmlFor="downPaymentPct" className="block text-sm font-medium text-gray-700">Down Payment (%)</label>
@@ -102,13 +97,13 @@ const ClosingCostEstimator: React.FC = () => {
             </div>
 
             {/* Right: Results */}
-            <div className="text-center p-8 bg-tn-primary text-white rounded-lg shadow-lg">
+            <div className="text-center p-8 bg-[#00a0b0] text-white rounded-lg shadow-lg">
               <h3 className="text-2xl font-bold">Estimated Closing Summary</h3>
               <div className="mt-6 grid grid-cols-1 gap-4 text-left">
                 <div className="flex justify-between"><span className="font-semibold">Purchase Price:</span> <span>{fmtMoney(purchasePrice)}</span></div>
                 <div className="flex justify-between"><span className="font-semibold">Down Payment ({downPaymentPct}%):</span> <span>{fmtMoney(downPayment)}</span></div>
                 <div className="flex justify-between"><span className="font-semibold">Estimated Loan Amount:</span> <span>{fmtMoney(loanAmount)}</span></div>
-                <hr className="border-blue-600 my-2" />
+                <hr className="border-white/30 my-2" />
                 <div className="flex justify-between"><span className="font-semibold">Lender Fees:</span> <span>{fmtMoney(lenderFees)}</span></div>
                 <div className="flex justify-between"><span className="font-semibold">Title & Escrow:</span> <span>{fmtMoney(titleEscrow)}</span></div>
                 <div className="flex justify-between"><span className="font-semibold">Recording Fees:</span> <span>{fmtMoney(recordingFees)}</span></div>
@@ -118,11 +113,11 @@ const ClosingCostEstimator: React.FC = () => {
                 {hoaInitiation > 0 && (
                   <div className="flex justify-between"><span className="font-semibold">HOA Initiation:</span> <span>{fmtMoney(hoaInitiation)}</span></div>
                 )}
-                <hr className="border-blue-600 my-2" />
-                <div className="flex justify-between text-lg"><span className="font-bold">Estimated Closing Costs:</span> <span className="font-bold text-tn-secondary">{fmtMoney(estimatedClosingCosts)}</span></div>
-                <div className="flex justify-between text-xl mt-2"><span className="font-extrabold">Estimated Cash to Close:</span> <span className="font-extrabold text-white">{fmtMoney(cashToClose)}</span></div>
+                <hr className="border-white/30 my-2" />
+                <div className="flex justify-between text-lg"><span className="font-bold">Estimated Closing Costs:</span> <span className="font-bold text-[#8B4513]">{fmtMoney(estimatedClosingCosts)}</span></div>
+                <div className="flex justify-between text-xl mt-2"><span className="font-extrabold">Estimated Cash to Close:</span> <span className="font-extrabold text-[#8B4513]">{fmtMoney(cashToClose)}</span></div>
               </div>
-              <p className="text-xs text-gray-300 mt-6">
+              <p className="text-xs text-gray-100 mt-6">
                 Estimates are for planning purposes only. Actual costs vary by jurisdiction, lender, and property. Consult your lender and title company for a formal quote.
               </p>
             </div>

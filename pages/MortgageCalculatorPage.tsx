@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { PageHeader } from '../components/Header';
 
 const MortgageCalculatorPage: React.FC = () => {
   const [homePrice, setHomePrice] = useState(350000);
@@ -43,26 +44,21 @@ const MortgageCalculatorPage: React.FC = () => {
 
   return (
     <>
-        <section className="bg-tn-primary py-20">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                    Mortgage <span className="text-tn-secondary">Calculator</span>
-                </h1>
-                <p className="mt-6 text-xl text-gray-200 max-w-3xl mx-auto">
-                    Estimate your monthly mortgage payment and discover your buying power.
-                </p>
-            </div>
-        </section>
+        <PageHeader
+            backgroundImage="/media/ResourcesHeader.jpg"
+            title={<>Mortgage <span className="text-[#00a0b0]">Calculator</span></>}
+            subtitle="Estimate your monthly mortgage payment and discover your buying power."
+        />
 
-        <section className="py-20 bg-tn-light">
+        <section className="py-20 bg-gray-50">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div className="bg-white p-8 rounded-lg shadow-lg">
-                        <h2 className="text-2xl font-bold text-tn-primary mb-6">Payment Calculator</h2>
+                        <h2 className="text-2xl font-bold text-[#00a0b0] mb-6">Payment Calculator</h2>
                         <form className="space-y-6">
                             <div>
                                 <label htmlFor="homePrice" className="block text-sm font-medium text-gray-700">Home Price</label>
-                                <input type="number" id="homePrice" value={homePrice} onChange={(e) => setHomePrice(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                                <input type="number" id="homePrice" value={homePrice} onChange={(e) => setHomePrice(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                             </div>
                             <div>
                                 <label htmlFor="downPayment" className="block text-sm font-medium text-gray-700">Down Payment</label>
@@ -83,14 +79,14 @@ const MortgageCalculatorPage: React.FC = () => {
                             </div>
                         </form>
                     </div>
-                    <div className="text-center p-8 bg-tn-primary text-white rounded-lg shadow-lg">
-                        <h3 className="text-xl font-semibold text-gray-200">Estimated Monthly Payment</h3>
-                        <p className="text-5xl font-bold text-tn-secondary my-4">{formatPayment(monthlyPayment)}</p>
-                        <div className="space-y-2 text-left mt-6 pt-6 border-t border-blue-600">
+                    <div className="text-center p-8 bg-[#00a0b0] text-white rounded-lg shadow-lg">
+                        <h3 className="text-xl font-semibold text-white">Estimated Monthly Payment</h3>
+                        <p className="text-5xl font-bold text-[#8B4513] my-4">{formatPayment(monthlyPayment)}</p>
+                        <div className="space-y-2 text-left mt-6 pt-6 border-t border-white/30">
                            <div className="flex justify-between"><span className="font-semibold">Principal & Interest:</span> <span>{formatPayment(monthlyPayment)}</span></div>
                            <div className="flex justify-between"><span className="font-semibold">Loan Amount:</span> <span>{formatCurrency(homePrice - downPayment)}</span></div>
                         </div>
-                        <p className="text-xs text-gray-300 mt-6">* This is an estimate and does not include taxes, insurance, or PMI. Please consult a lender for an official quote.</p>
+                        <p className="text-xs text-gray-100 mt-6">* This is an estimate and does not include taxes, insurance, or PMI. Please consult a lender for an official quote.</p>
                     </div>
                 </div>
             </div>
