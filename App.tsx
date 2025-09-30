@@ -33,7 +33,7 @@ const App: React.FC = () => {
       case 'join':
         return <JoinTeamPage />;
       case 'about':
-        return <AboutUsPage />;
+        return <AboutUsPage onNavigate={handleNavigate} />;
       case 'blog':
         return <BlogPage />;
       case 'mortgage-calculator':
