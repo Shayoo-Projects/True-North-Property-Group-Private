@@ -5,9 +5,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import BuyersPage from './pages/BuyersPage';
 import SellersPage from './pages/SellersPage';
-import JoinTeamPage from './pages/JoinTeamPage';
 import AboutUsPage from './pages/AboutUsPage';
-import BlogPage from './pages/BlogPage';
 import MortgageCalculatorPage from './pages/MortgageCalculatorPage';
 import ContactPage from './pages/ContactPage';
 import FinancialAssessmentPage from './pages/FinancialAssessmentPage';
@@ -30,9 +28,7 @@ const App: React.FC = () => {
             <Route path="/" element={<><ScrollToTop /><HomePage /></>} />
             <Route path="/buyers" element={<><ScrollToTop /><BuyersPage /></>} />
             <Route path="/sellers" element={<><ScrollToTop /><SellersPage /></>} />
-            <Route path="/join" element={<><ScrollToTop /><JoinTeamPage /></>} />
             <Route path="/about" element={<><ScrollToTop /><AboutUsPage /></>} />
-            <Route path="/blog" element={<><ScrollToTop /><BlogPage /></>} />
             <Route path="/mortgage-calculator" element={<><ScrollToTop /><MortgageCalculatorPage /></>} />
             <Route path="/closing-cost-estimator" element={<><ScrollToTop /><ClosingCostEstimator /></>} />
             <Route path="/financial-assessment" element={<><ScrollToTop /><FinancialAssessmentPage /></>} />

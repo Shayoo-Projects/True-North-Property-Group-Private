@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../media/logo_full.png';
 import partnerLogo1 from '../media/PartnerLogo_1.jpg';
 import partnerLogo2 from '../media/PartnerLogo_2.jpg';
@@ -30,21 +31,27 @@ const Footer: React.FC = () => {
                         
                     </div>
                     <div className="mt-12 lg:mt-0 lg:col-span-2">
-                        <div className="flex w-full flex-row items-start justify-center gap-20">
+                        <div className="flex w-full flex-row items-start justify-center gap-8 lg:gap-12">
                             <div className="text-left">
-                                <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Services</h3>
+                                <h3 className="text-sm font-semibold text-white tracking-wider uppercase pb-2 border-b-2 border-tn-brown inline-block">Services</h3>
                                 <ul role="list" className="mt-4 space-y-4">
-                                    <li><a href="#" className="text-base text-gray-200 hover:text-white">Home Buying</a></li>
-                                    <li><a href="#" className="text-base text-gray-200 hover:text-white">Home Selling</a></li>
+                                    <li><Link to="/buyers" className="text-base text-gray-200 hover:text-white">Home Buying</Link></li>
+                                    <li><Link to="/sellers" className="text-base text-gray-200 hover:text-white">Home Selling</Link></li>
                                 </ul>
                             </div>
-                            <div className="md:mt-0 text-left">
-                                <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
+                            <div className="text-left">
+                                <h3 className="text-sm font-semibold text-white tracking-wider uppercase pb-2 border-b-2 border-tn-brown inline-block">Company</h3>
                                 <ul role="list" className="mt-4 space-y-4">
-                                    <li><a href="#" className="text-base text-gray-200 hover:text-white">About Us</a></li>
-                                    <li><a href="#" className="text-base text-gray-200 hover:text-white">Contact Us</a></li>
-                                    <li><a href="#" className="text-base text-gray-200 hover:text-white">Resources</a></li>
-
+                                    <li><Link to="/about" className="text-base text-gray-200 hover:text-white">About Us</Link></li>
+                                    <li><Link to="/contact" className="text-base text-gray-200 hover:text-white">Contact Us</Link></li>
+                                </ul>
+                            </div>
+                            <div className="text-left">
+                                <h3 className="text-sm font-semibold text-white tracking-wider uppercase pb-2 border-b-2 border-tn-brown inline-block">Resources</h3>
+                                <ul role="list" className="mt-4 space-y-4">
+                                    <li><Link to="/mortgage-calculator" className="text-base text-gray-200 hover:text-white">Mortgage Calculator</Link></li>
+                                    <li><Link to="/closing-cost-estimator" className="text-base text-gray-200 hover:text-white">Closing Cost Estimator</Link></li>
+                                    <li><Link to="/financial-assessment" className="text-base text-gray-200 hover:text-white">Financial Assessment</Link></li>
                                 </ul>
                             </div>
                         </div>
