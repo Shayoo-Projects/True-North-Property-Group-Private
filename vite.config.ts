@@ -25,6 +25,20 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
-      }
+      },
+      build: {
+        // Generate source maps for better debugging
+        sourcemap: true,
+        // Ensure all assets are included
+        assetsInlineLimit: 0,
+        // Optimize output for static hosting
+        rollupOptions: {
+          output: {
+            manualChunks: {
+              vendor: ['react', 'react-dom', 'react-router-dom'],
+            },
+          },
+        },
+      },
     };
 });
