@@ -8,8 +8,10 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
-        // Support for React Router history API
-        historyApiFallback: true,
+      },
+      preview: {
+        port: 3000,
+        host: '0.0.0.0',
       },
       publicDir: 'public',
       plugins: [react()],

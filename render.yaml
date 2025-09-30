@@ -1,7 +1,8 @@
 services:
   - type: web
     name: true-north-property-group
-    buildCommand: npm run build
+    env: static
+    buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     routes:
       - type: rewrite
