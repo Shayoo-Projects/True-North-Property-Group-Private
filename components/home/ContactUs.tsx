@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import IMG1 from '../../media/IMG_1.jpg';
 import IMG2 from '../../media/IMG_2.jpg';
 import IMG3 from '../../media/IMG_3.jpeg';
@@ -41,8 +42,8 @@ const ContactUs: React.FC = () => {
             </div>
 
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
-              <a href="#" className="inline-block bg-[#583a1e] text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider text-center w-full sm:w-auto">Get in touch</a>
-              <a href="#" className="inline-block border border-white text-gray-800 font-bold py-4 px-10 rounded-lg text-lg hover:bg-white hover:text-black transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider text-center w-full sm:w-auto">Learn more</a>
+              <Link to="/contact" className="inline-block bg-[#583a1e] text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider text-center w-full sm:w-auto">Get in touch</Link>
+              <Link to="/about" className="inline-block border border-white text-gray-800 font-bold py-4 px-10 rounded-lg text-lg hover:bg-white hover:text-black transform hover:scale-105 transition-all duration-300 shadow-lg uppercase tracking-wider text-center w-full sm:w-auto">Learn more</Link>
             </div>
           </div>
         </div>

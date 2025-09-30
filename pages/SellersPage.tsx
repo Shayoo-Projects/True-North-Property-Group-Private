@@ -5,11 +5,7 @@ import SellerBenefits from '../components/sellerpage/SellerBenefits';
 import SellerJourney from '../components/sellerpage/SellerJourney';
 import SellerCosts from '../components/sellerpage/SellerCosts';
 
-interface SellersPageProps {
-  onNavigate?: (page: string) => void;
-}
-
-const SellersPage: React.FC<SellersPageProps> = ({ onNavigate }) => {
+const SellersPage: React.FC = () => {
   return (
     <>
       <PageHeader 
@@ -20,7 +16,7 @@ const SellersPage: React.FC<SellersPageProps> = ({ onNavigate }) => {
       <SellerAbout />
       <SellerJourney />
       <SellerBenefits />
-      <SellerCosts onNavigate={onNavigate} />
+      <SellerCosts />
     </>
   );
 };

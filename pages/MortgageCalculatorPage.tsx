@@ -2,16 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { PageHeader } from '../components/Header';
 
 const MortgageCalculatorPage: React.FC = () => {
-  const [homePrice, setHomePrice] = useState(350000);
-  const [downPayment, setDownPayment] = useState(70000);
-  const [interestRate, setInterestRate] = useState(6.5);
-  const [loanTerm, setLoanTerm] = useState(30);
+  const [homePrice, setHomePrice] = useState<number | undefined>(undefined);
+  const [downPayment, setDownPayment] = useState<number | undefined>(undefined);
+  const [interestRate, setInterestRate] = useState<number | undefined>(undefined);
+  const [loanTerm, setLoanTerm] = useState<number>(30); // Keep default loan term
   const [monthlyPayment, setMonthlyPayment] = useState(0);
 
   useEffect(() => {
     const calculatePayment = () => {
-      const principal = homePrice - downPayment;
-      const monthlyInterestRate = (interestRate / 100) / 12;
+      // Handle undefined values with safe defaults
+      const safeHomePrice = homePrice || 0;
+      const safeDownPayment = downPayment || 0;
+      const safeInterestRate = interestRate || 0;
+      
+      const principal = safeHomePrice - safeDownPayment;
+      const monthlyInterestRate = (safeInterestRate / 100) / 12;
       const numberOfPayments = loanTerm * 12;
 
       if (principal > 0 && monthlyInterestRate > 0) {
@@ -58,19 +63,19 @@ const MortgageCalculatorPage: React.FC = () => {
                         <form className="space-y-6">
                             <div>
                                 <label htmlFor="homePrice" className="block text-sm font-medium text-gray-700">Home Price</label>
-                                <input type="number" id="homePrice" value={homePrice} onChange={(e) => setHomePrice(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
+                                <input type="number" id="homePrice" value={homePrice || ''} onChange={(e) => setHomePrice(e.target.value ? Number(e.target.value) : undefined)} placeholder="Enter home price" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                             </div>
                             <div>
                                 <label htmlFor="downPayment" className="block text-sm font-medium text-gray-700">Down Payment</label>
-                                <input type="number" id="downPayment" value={downPayment} onChange={(e) => setDownPayment(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                                <input type="number" id="downPayment" value={downPayment || ''} onChange={(e) => setDownPayment(e.target.value ? Number(e.target.value) : undefined)} placeholder="Enter down payment" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                             </div>
                             <div>
                                 <label htmlFor="interestRate" className="block text-sm font-medium text-gray-700">Interest Rate (%)</label>
-                                <input type="number" step="0.01" id="interestRate" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                                <input type="number" step="0.01" id="interestRate" value={interestRate || ''} onChange={(e) => setInterestRate(e.target.value ? Number(e.target.value) : undefined)} placeholder="e.g., 6.5" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                             </div>
                             <div>
                                 <label htmlFor="loanTerm" className="block text-sm font-medium text-gray-700">Loan Term (Years)</label>
-                                <select id="loanTerm" value={loanTerm} onChange={(e) => setLoanTerm(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm">
+                                <select id="loanTerm" value={loanTerm} onChange={(e) => setLoanTerm(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm">
                                     <option>30</option>
                                     <option>20</option>
                                     <option>15</option>

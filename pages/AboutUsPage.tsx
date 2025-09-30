@@ -5,11 +5,7 @@ import TeamSection from '../components/about/TeamSection';
 import WhyChooseUsSection from '../components/about/WhyChooseUsSection';
 import AboutCTA from '../components/about/AboutCTA';
 
-interface AboutUsPageProps {
-  onNavigate?: (page: string) => void;
-}
-
-const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
+const AboutUsPage: React.FC = () => {
   return (
     <>
       <PageHeader 
@@ -20,7 +16,7 @@ const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
       <MissionSection />
       <TeamSection />
       <WhyChooseUsSection />
-      <AboutCTA onNavigate={onNavigate} />
+      <AboutCTA />
     </>
   );
 };

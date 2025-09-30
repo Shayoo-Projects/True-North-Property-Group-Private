@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -14,50 +15,34 @@ import ClosingCostEstimator from './pages/ClosingCostEstimator';
 
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState('home');
-
-  const handleNavigate = (page: string) => {
-    const validPages = ['home', 'buyers', 'sellers', 'join', 'about', 'blog', 'mortgage-calculator', 'closing-cost-estimator', 'contact', 'financial-assessment'];
-    if (validPages.includes(page)) {
-        window.scrollTo(0, 0); // Scroll to top on page change
-        setCurrentPage(page);
-    }
-  };
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'buyers':
-        return <BuyersPage />;
-      case 'sellers':
-        return <SellersPage onNavigate={handleNavigate} />;
-      case 'join':
-        return <JoinTeamPage />;
-      case 'about':
-        return <AboutUsPage onNavigate={handleNavigate} />;
-      case 'blog':
-        return <BlogPage />;
-      case 'mortgage-calculator':
-        return <MortgageCalculatorPage />;
-      case 'closing-cost-estimator':
-        return <ClosingCostEstimator />;
-      case 'financial-assessment':
-        return <FinancialAssessmentPage />;
-      case 'contact':
-        return <ContactPage />;
-      case 'home':
-      default:
-        return <HomePage onNavigate={handleNavigate} />;
-    }
+  // Scroll to top on page change
+  const ScrollToTop = () => {
+    window.scrollTo(0, 0);
+    return null;
   };
 
   return (
-    <div className="bg-tn-light font-sans text-tn-dark antialiased">
-      <Navbar onNavigate={handleNavigate} />
-      <main>
-        {renderPage()}
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="bg-tn-light font-sans text-tn-dark antialiased">
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<><ScrollToTop /><HomePage /></>} />
+            <Route path="/buyers" element={<><ScrollToTop /><BuyersPage /></>} />
+            <Route path="/sellers" element={<><ScrollToTop /><SellersPage /></>} />
+            <Route path="/join" element={<><ScrollToTop /><JoinTeamPage /></>} />
+            <Route path="/about" element={<><ScrollToTop /><AboutUsPage /></>} />
+            <Route path="/blog" element={<><ScrollToTop /><BlogPage /></>} />
+            <Route path="/mortgage-calculator" element={<><ScrollToTop /><MortgageCalculatorPage /></>} />
+            <Route path="/closing-cost-estimator" element={<><ScrollToTop /><ClosingCostEstimator /></>} />
+            <Route path="/financial-assessment" element={<><ScrollToTop /><FinancialAssessmentPage /></>} />
+            <Route path="/contact" element={<><ScrollToTop /><ContactPage /></>} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 };
 

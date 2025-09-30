@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import logoFull from '../media/logo_full.png';
 import logoSingle from '../media/logo_single.png';
 
-interface NavbarProps {
-  onNavigate: (page: string) => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
+const Navbar: React.FC = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   // Show/hide on scroll state
@@ -55,20 +53,19 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
   }, []);
 //---------------------------
   const mainLinks = [
-    { name: 'Home', page: 'home' },
-    { name: 'Buyers', page: 'buyers' },
-    { name: 'Sellers', page: 'sellers' },
-    { name: 'About Us', page: 'about' },
+    { name: 'Home', path: '/' },
+    { name: 'Buyers', path: '/buyers' },
+    { name: 'Sellers', path: '/sellers' },
+    { name: 'About Us', path: '/about' },
   ];
 
   const resourceLinks = [
-    { name: 'Mortgage Calculator', page: 'mortgage-calculator' },
-    { name: 'Closing Cost Estimator', page: 'closing-cost-estimator' },
-    { name: 'Financial Assessment', page: 'financial-assessment' },
+    { name: 'Mortgage Calculator', path: '/mortgage-calculator' },
+    { name: 'Closing Cost Estimator', path: '/closing-cost-estimator' },
+    { name: 'Financial Assessment', path: '/financial-assessment' },
   ];
 
-  const handleNavigate = (page: string) => {
-    onNavigate(page);
+  const handleLinkClick = () => {
     setIsOpen(false);
     setIsResourcesOpen(false);
     setIsMobileResourcesOpen(false);
@@ -79,19 +76,19 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center">
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigate('home'); }} className="flex-shrink-0 flex items-center space-x-2">
+            <Link to="/" onClick={handleLinkClick} className="flex-shrink-0 flex items-center space-x-2">
               {/* Mobile logo */}
               <img src={logoSingle} alt="True North Property Group" className="h-10 w-auto md:hidden" />
               {/* Desktop/tablet logo */}
               <img src={logoFull} alt="True North Property Group" className="hidden md:block h-12 md:h-14 w-56 md:w-72 object-contain" />
-            </a>
+            </Link>
           </div>
           <div className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {mainLinks.map((link) => (
-                <a key={link.name} href="#" onClick={(e) => {e.preventDefault(); handleNavigate(link.page);}} className="text-gray-600 hover:bg-tn-brown hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">
+                <Link key={link.name} to={link.path} onClick={handleLinkClick} className={`${location.pathname === link.path ? 'bg-tn-brown text-white' : 'text-gray-600'} hover:bg-tn-brown hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300`}>
                   {link.name}
-                </a>
+                </Link>
               ))}
               <div
                 className="relative"
@@ -119,17 +116,17 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   >
                     <div className="py-1" role="none">
                       {resourceLinks.map((link) => (
-                         <a key={link.name} href="#" onClick={(e) => {e.preventDefault(); handleNavigate(link.page);}} className="text-gray-700 hover:bg-tn-brown hover:text-white block px-4 py-2 text-sm" role="menuitem">
+                         <Link key={link.name} to={link.path} onClick={handleLinkClick} className={`${location.pathname === link.path ? 'bg-tn-brown text-white' : 'text-gray-700'} hover:bg-tn-brown hover:text-white block px-4 py-2 text-sm`} role="menuitem">
                            {link.name}
-                         </a>
+                         </Link>
                       ))}
                     </div>
                   </div>
                 )}
               </div>
-              <a href="#" onClick={(e) => {e.preventDefault(); handleNavigate('contact');}} className="bg-tn-brown text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:opacity-90">
+              <Link to="/contact" onClick={handleLinkClick} className="bg-tn-brown text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:opacity-90">
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
           <div className="lg:hidden flex items-center">
@@ -147,9 +144,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         <div className="lg:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {mainLinks.map((link) => (
-               <a key={link.name} href="#" onClick={(e) => {e.preventDefault(); handleNavigate(link.page);}} className="text-gray-600 hover:bg-tn-brown hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300">
+               <Link key={link.name} to={link.path} onClick={handleLinkClick} className={`${location.pathname === link.path ? 'bg-tn-brown text-white' : 'text-gray-600'} hover:bg-tn-brown hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300`}>
                 {link.name}
-              </a>
+              </Link>
             ))}
             <div>
               <button onClick={() => setIsMobileResourcesOpen(!isMobileResourcesOpen)} className="w-full text-left text-gray-600 hover:bg-tn-brown hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 flex justify-between items-center">
@@ -161,16 +158,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
               {isMobileResourcesOpen && (
                 <div className="pl-4 mt-1 space-y-1">
                   {resourceLinks.map((link) => (
-                     <a key={link.name} href="#" onClick={(e) => {e.preventDefault(); handleNavigate(link.page);}} className="text-gray-600 hover:bg-tn-brown hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300">
+                     <Link key={link.name} to={link.path} onClick={handleLinkClick} className={`${location.pathname === link.path ? 'bg-tn-brown text-white' : 'text-gray-600'} hover:bg-tn-brown hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300`}>
                        {link.name}
-                     </a>
+                     </Link>
                   ))}
                 </div>
               )}
             </div>
-             <a href="#" onClick={(e) => {e.preventDefault(); handleNavigate('contact');}} className="bg-tn-brown text-white block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 hover:opacity-90">
+             <Link to="/contact" onClick={handleLinkClick} className="bg-tn-brown text-white block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 hover:opacity-90">
               Contact
-            </a>
+            </Link>
           </div>
         </div>
       )}

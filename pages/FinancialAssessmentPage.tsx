@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { PageHeader } from '../components/Header';
 
 const FinancialAssessmentPage: React.FC = () => {
-    const [income, setIncome] = useState(6000);
-    const [carPayment, setCarPayment] = useState(400);
-    const [creditCardPayment, setCreditCardPayment] = useState(200);
-    const [studentLoan, setStudentLoan] = useState(300);
-    const [otherDebt, setOtherDebt] = useState(0);
+    const [income, setIncome] = useState<number | undefined>(undefined);
+    const [carPayment, setCarPayment] = useState<number | undefined>(undefined);
+    const [creditCardPayment, setCreditCardPayment] = useState<number | undefined>(undefined);
+    const [studentLoan, setStudentLoan] = useState<number | undefined>(undefined);
+    const [otherDebt, setOtherDebt] = useState<number | undefined>(undefined);
 
     const [totalDebt, setTotalDebt] = useState(0);
     const [dti, setDti] = useState(0);
@@ -19,14 +19,21 @@ const FinancialAssessmentPage: React.FC = () => {
 
     useEffect(() => {
         const calculateAssessment = () => {
-            const currentTotalDebt = carPayment + creditCardPayment + studentLoan + otherDebt;
+            // Use 0 for undefined values when calculating
+            const safeIncome = income || 0;
+            const safeCarPayment = carPayment || 0;
+            const safeCreditCardPayment = creditCardPayment || 0;
+            const safeStudentLoan = studentLoan || 0;
+            const safeOtherDebt = otherDebt || 0;
+            
+            const currentTotalDebt = safeCarPayment + safeCreditCardPayment + safeStudentLoan + safeOtherDebt;
             setTotalDebt(currentTotalDebt);
 
-            if (income > 0) {
-                const maxMonthlyPaymentForHousing = (income * targetDti) - currentTotalDebt;
+            if (safeIncome > 0) {
+                const maxMonthlyPaymentForHousing = (safeIncome * targetDti) - currentTotalDebt;
                 setMonthlyPayment(maxMonthlyPaymentForHousing > 0 ? maxMonthlyPaymentForHousing : 0);
 
-                const currentDti = (currentTotalDebt / income) * 100;
+                const currentDti = (currentTotalDebt / safeIncome) * 100;
                 setDti(currentDti);
                 
                 if (maxMonthlyPaymentForHousing > 0) {
@@ -83,24 +90,24 @@ const FinancialAssessmentPage: React.FC = () => {
                             <form className="space-y-4">
                                 <div>
                                     <label htmlFor="income" className="block text-sm font-medium text-gray-700">Gross Monthly Income</label>
-                                    <input type="number" id="income" value={income} onChange={(e) => setIncome(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
+                                    <input type="number" id="income" value={income || ''} onChange={(e) => setIncome(e.target.value ? Number(e.target.value) : undefined)} placeholder="Enter monthly income" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                                 </div>
                                 <h3 className="text-lg font-semibold text-gray-800 pt-4 border-t">Monthly Debt Payments</h3>
                                 <div>
                                     <label htmlFor="carPayment" className="block text-sm font-medium text-gray-700">Car Payment(s)</label>
-                                    <input type="number" id="carPayment" value={carPayment} onChange={(e) => setCarPayment(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                                    <input type="number" id="carPayment" value={carPayment || ''} onChange={(e) => setCarPayment(e.target.value ? Number(e.target.value) : undefined)} placeholder="Enter car payment" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                                 </div>
                                 <div>
                                     <label htmlFor="creditCardPayment" className="block text-sm font-medium text-gray-700">Credit Card Minimums</label>
-                                    <input type="number" id="creditCardPayment" value={creditCardPayment} onChange={(e) => setCreditCardPayment(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                                    <input type="number" id="creditCardPayment" value={creditCardPayment || ''} onChange={(e) => setCreditCardPayment(e.target.value ? Number(e.target.value) : undefined)} placeholder="Enter credit card payments" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                                 </div>
                                 <div>
                                     <label htmlFor="studentLoan" className="block text-sm font-medium text-gray-700">Student Loan(s)</label>
-                                    <input type="number" id="studentLoan" value={studentLoan} onChange={(e) => setStudentLoan(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                                    <input type="number" id="studentLoan" value={studentLoan || ''} onChange={(e) => setStudentLoan(e.target.value ? Number(e.target.value) : undefined)} placeholder="Enter student loan payments" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                                 </div>
                                 <div>
                                     <label htmlFor="otherDebt" className="block text-sm font-medium text-gray-700">Other Monthly Debts</label>
-                                    <input type="number" id="otherDebt" value={otherDebt} onChange={(e) => setOtherDebt(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                                    <input type="number" id="otherDebt" value={otherDebt || ''} onChange={(e) => setOtherDebt(e.target.value ? Number(e.target.value) : undefined)} placeholder="Enter other monthly debts" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                                 </div>
                             </form>
                         </div>

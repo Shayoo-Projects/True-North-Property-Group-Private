@@ -1,10 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-interface SellerCostsProps {
-    onNavigate?: (page: string) => void;
-}
-
-const SellerCosts: React.FC<SellerCostsProps> = ({ onNavigate }) => {
+const SellerCosts: React.FC = () => {
     const costs = [
         { title: "Mortgage Payoff", description: "Current loan(s) and liens cleared at closing." },
         { title: "Commissions", description: "Typically 6% (split between listing and buyer agents, negotiable)." },
@@ -33,12 +30,12 @@ const SellerCosts: React.FC<SellerCostsProps> = ({ onNavigate }) => {
                     </div>
                     
                     <div className="mt-8 text-center">
-                        <button
-                            onClick={() => onNavigate && onNavigate('contact')}
+                        <Link
+                            to="/contact"
                             className="inline-block bg-[#00a0b0] text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-[#008a99] transition-colors duration-300 shadow-md"
                         >
                             Get Your Free Home Valuation
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

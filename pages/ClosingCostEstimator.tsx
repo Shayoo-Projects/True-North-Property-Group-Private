@@ -3,28 +3,47 @@ import { PageHeader } from '../components/Header';
 
 const ClosingCostEstimator: React.FC = () => {
   // Inputs
-  const [purchasePrice, setPurchasePrice] = useState(450000);
-  const [downPaymentPct, setDownPaymentPct] = useState(10); // %
-  const [propertyTaxRatePct, setPropertyTaxRatePct] = useState(1.0); // % of purchase price annually
-  const [insuranceAnnual, setInsuranceAnnual] = useState(1200); // $/year
-  const [transferTaxRatePct, setTransferTaxRatePct] = useState(0.5); // % of purchase price
-  const [lenderFees, setLenderFees] = useState(1500);
-  const [titleEscrow, setTitleEscrow] = useState(1200);
-  const [recordingFees, setRecordingFees] = useState(300);
-  const [hoaInitiation, setHoaInitiation] = useState(0);
+  const [purchasePrice, setPurchasePrice] = useState<number | undefined>(undefined);
+  const [downPaymentPct, setDownPaymentPct] = useState<number | undefined>(undefined); // %
+  const [propertyTaxRatePct, setPropertyTaxRatePct] = useState<number | undefined>(undefined); // % of purchase price annually
+  const [insuranceAnnual, setInsuranceAnnual] = useState<number | undefined>(undefined); // $/year
+  const [transferTaxRatePct, setTransferTaxRatePct] = useState<number | undefined>(undefined); // % of purchase price
+  const [lenderFees, setLenderFees] = useState<number | undefined>(undefined);
+  const [titleEscrow, setTitleEscrow] = useState<number | undefined>(undefined);
+  const [recordingFees, setRecordingFees] = useState<number | undefined>(undefined);
+  const [hoaInitiation, setHoaInitiation] = useState<number | undefined>(undefined);
 
   // Derived
-  const downPayment = useMemo(() => purchasePrice * (downPaymentPct / 100), [purchasePrice, downPaymentPct]);
-  const loanAmount = useMemo(() => Math.max(purchasePrice - downPayment, 0), [purchasePrice, downPayment]);
+  const downPayment = useMemo(() => {
+    if (purchasePrice === undefined || downPaymentPct === undefined) return 0;
+    return purchasePrice * (downPaymentPct / 100);
+  }, [purchasePrice, downPaymentPct]);
+  
+  const loanAmount = useMemo(() => {
+    if (purchasePrice === undefined || downPayment === undefined) return 0;
+    return Math.max(purchasePrice - downPayment, 0);
+  }, [purchasePrice, downPayment]);
 
   // Prepaids/escrows (simple assumptions)
-  const propertyTaxAnnual = useMemo(() => purchasePrice * (propertyTaxRatePct / 100), [purchasePrice, propertyTaxRatePct]);
-  const propertyTaxEscrow = useMemo(() => (propertyTaxAnnual / 12) * 6, [propertyTaxAnnual]); // collect ~6 months
-  const insurancePrepaid = useMemo(() => insuranceAnnual, [insuranceAnnual]); // 12 months upfront
-  const transferTax = useMemo(() => purchasePrice * (transferTaxRatePct / 100), [purchasePrice, transferTaxRatePct]);
+  const propertyTaxAnnual = useMemo(() => {
+    if (purchasePrice === undefined || propertyTaxRatePct === undefined) return 0;
+    return purchasePrice * (propertyTaxRatePct / 100);
+  }, [purchasePrice, propertyTaxRatePct]);
+  
+  const propertyTaxEscrow = useMemo(() => {
+    if (propertyTaxAnnual === undefined) return 0;
+    return (propertyTaxAnnual / 12) * 6; // collect ~6 months
+  }, [propertyTaxAnnual]);
+  
+  const insurancePrepaid = useMemo(() => insuranceAnnual || 0, [insuranceAnnual]); // 12 months upfront
+  
+  const transferTax = useMemo(() => {
+    if (purchasePrice === undefined || transferTaxRatePct === undefined) return 0;
+    return purchasePrice * (transferTaxRatePct / 100);
+  }, [purchasePrice, transferTaxRatePct]);
 
   const estimatedClosingCosts = useMemo(() => {
-    const sum = lenderFees + titleEscrow + recordingFees + transferTax + propertyTaxEscrow + insurancePrepaid + hoaInitiation;
+    const sum = (lenderFees || 0) + (titleEscrow || 0) + (recordingFees || 0) + transferTax + propertyTaxEscrow + insurancePrepaid + (hoaInitiation || 0);
     return Math.max(sum, 0);
   }, [lenderFees, titleEscrow, recordingFees, transferTax, propertyTaxEscrow, insurancePrepaid, hoaInitiation]);
 
@@ -50,47 +69,47 @@ const ClosingCostEstimator: React.FC = () => {
               <form className="space-y-5">
                 <div>
                   <label htmlFor="purchasePrice" className="block text-sm font-medium text-gray-700">Purchase Price</label>
-                  <input id="purchasePrice" type="number" value={purchasePrice} onChange={(e) => setPurchasePrice(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
+                  <input id="purchasePrice" type="number" value={purchasePrice || ''} onChange={(e) => setPurchasePrice(e.target.value ? Number(e.target.value) : undefined)} placeholder="Enter purchase price" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                 </div>
                 <div>
                   <label htmlFor="downPaymentPct" className="block text-sm font-medium text-gray-700">Down Payment (%)</label>
-                  <input id="downPaymentPct" type="number" step="0.1" value={downPaymentPct} onChange={(e) => setDownPaymentPct(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                  <input id="downPaymentPct" type="number" step="0.1" value={downPaymentPct || ''} onChange={(e) => setDownPaymentPct(e.target.value ? Number(e.target.value) : undefined)} placeholder="Enter percentage" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="propertyTaxRatePct" className="block text-sm font-medium text-gray-700">Property Tax Rate (%/yr)</label>
-                    <input id="propertyTaxRatePct" type="number" step="0.01" value={propertyTaxRatePct} onChange={(e) => setPropertyTaxRatePct(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                    <input id="propertyTaxRatePct" type="number" step="0.01" value={propertyTaxRatePct || ''} onChange={(e) => setPropertyTaxRatePct(e.target.value ? Number(e.target.value) : undefined)} placeholder="e.g., 1.0" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                   </div>
                   <div>
                     <label htmlFor="insuranceAnnual" className="block text-sm font-medium text-gray-700">Homeowners Insurance ($/yr)</label>
-                    <input id="insuranceAnnual" type="number" value={insuranceAnnual} onChange={(e) => setInsuranceAnnual(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                    <input id="insuranceAnnual" type="number" value={insuranceAnnual || ''} onChange={(e) => setInsuranceAnnual(e.target.value ? Number(e.target.value) : undefined)} placeholder="e.g., 1200" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="transferTaxRatePct" className="block text-sm font-medium text-gray-700">Transfer/Grant Tax (% of price)</label>
-                    <input id="transferTaxRatePct" type="number" step="0.01" value={transferTaxRatePct} onChange={(e) => setTransferTaxRatePct(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                    <input id="transferTaxRatePct" type="number" step="0.01" value={transferTaxRatePct || ''} onChange={(e) => setTransferTaxRatePct(e.target.value ? Number(e.target.value) : undefined)} placeholder="e.g., 0.5" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                   </div>
                   <div>
                     <label htmlFor="lenderFees" className="block text-sm font-medium text-gray-700">Lender Fees ($)</label>
-                    <input id="lenderFees" type="number" value={lenderFees} onChange={(e) => setLenderFees(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                    <input id="lenderFees" type="number" value={lenderFees || ''} onChange={(e) => setLenderFees(e.target.value ? Number(e.target.value) : undefined)} placeholder="e.g., 1500" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
                     <label htmlFor="titleEscrow" className="block text-sm font-medium text-gray-700">Title/Escrow ($)</label>
-                    <input id="titleEscrow" type="number" value={titleEscrow} onChange={(e) => setTitleEscrow(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                    <input id="titleEscrow" type="number" value={titleEscrow || ''} onChange={(e) => setTitleEscrow(e.target.value ? Number(e.target.value) : undefined)} placeholder="e.g., 1200" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                   </div>
                   <div>
                     <label htmlFor="recordingFees" className="block text-sm font-medium text-gray-700">Recording Fees ($)</label>
-                    <input id="recordingFees" type="number" value={recordingFees} onChange={(e) => setRecordingFees(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                    <input id="recordingFees" type="number" value={recordingFees || ''} onChange={(e) => setRecordingFees(e.target.value ? Number(e.target.value) : undefined)} placeholder="e.g., 300" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                   </div>
                   <div>
                     <label htmlFor="hoaInitiation" className="block text-sm font-medium text-gray-700">HOA Initiation ($)</label>
-                    <input id="hoaInitiation" type="number" value={hoaInitiation} onChange={(e) => setHoaInitiation(Number(e.target.value))} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-tn-primary focus:border-tn-primary sm:text-sm" />
+                    <input id="hoaInitiation" type="number" value={hoaInitiation || ''} onChange={(e) => setHoaInitiation(e.target.value ? Number(e.target.value) : undefined)} placeholder="If applicable" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#00a0b0] focus:border-[#00a0b0] sm:text-sm" />
                   </div>
                 </div>
               </form>

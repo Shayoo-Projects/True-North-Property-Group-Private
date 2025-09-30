@@ -1,15 +1,15 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import heroVideo1 from '../../media/herovid1.mp4';
 import heroVideo2 from '../../media/herovid2.mp4';
 import heroVideo3 from '../../media/herovid3.mp4';
 
 interface HeroProps {
-  onNavigate?: (page: string) => void;
   videoSrc?: string; // optional video source URL
 }
 
-const Hero: React.FC<HeroProps> = ({ onNavigate, videoSrc }) => {
+const Hero: React.FC<HeroProps> = ({ videoSrc }) => {
   // Prepare the rotating list of sources (use the three local files)
   const sources = useMemo(() => [heroVideo1, heroVideo2, heroVideo3], []);
   const [activeLayer, setActiveLayer] = useState<0 | 1>(0); // which video element is visible
@@ -119,20 +119,18 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, videoSrc }) => {
             Helping clients buy and sell homes in Virginia, Maryland, and Washington D.C.
           </p>
           <div className="mt-10 flex items-center gap-4">
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('buyers'); }}
+            <Link
+              to="/buyers"
               className="inline-block bg-[#583a1e] text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg"
             >
               Buyers
-            </a>
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('sellers'); }}
+            </Link>
+            <Link
+              to="/sellers"
               className="inline-block border border-white text-white font-bold py-4 px-10 rounded-lg text-lg hover:bg-white hover:text-[#00a0b0] transform hover:scale-105 transition-all duration-300 shadow-lg"
             >
               Sellers
-            </a>
+            </Link>
           </div>
         </div>
       </div>
