@@ -46,8 +46,8 @@ const Hero: React.FC<HeroProps> = ({ videoSrc }) => {
       hidden.load();
     }
 
-    const FADE_MS = 700; // must match the Tailwind duration-700 below
-    const SLIDE_MS = 7000; // each video displays for 5 seconds
+    const FADE_MS = 900; // must match the Tailwind duration-700 below
+    const SLIDE_MS = 5000; // each video displays for 4.5 seconds
 
     const interval = setInterval(() => {
       const nextIndex = (currentIndex + 1) % sources.length;
