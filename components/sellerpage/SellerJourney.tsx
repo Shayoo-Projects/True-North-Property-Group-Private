@@ -26,7 +26,7 @@ const SellerJourney: React.FC = () => {
                 "Declutter and stage key spaces.",
                 "Improve curb appeal and touch up paint.",
                 "Deep clean kitchens, bathrooms, and windows.",
-                "Professional photography to showcase your home."
+                "Have professional photos taken of your home."
             ]
         },
         {
@@ -37,10 +37,10 @@ const SellerJourney: React.FC = () => {
                 </svg>
             ),
             steps: [
-                "MLS listing with \"Coming Soon\" status.",
-                "Professional photos & virtual tours.",
-                "Digital marketing campaigns & open houses.",
-                "For Sale sign & lockbox installed."
+                "Publish listing on MLS in \"Coming Soon\" and then \"Active\" Status",
+                "Market on social media",
+                "Make virtual tours available",
+                "Conduct open houses"
             ]
         },
         {

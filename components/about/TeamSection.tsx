@@ -4,7 +4,7 @@ import BrandonProfileImg from '../../media/brandon_profile.jpg';
 
 const TeamSection: React.FC = () => {
     const teamMembers = [
-        { name: "Tony Smith", title: "Licensed in Virginia and Washington, D.C. and is a certified military relocation professional", imageUrl: TonyProfileImg },
+        { name: "Tony Smith", title: "Licensed in Virginia, Maryland, and Washington, D.C., and is a certified military relocation professional", imageUrl: TonyProfileImg },
         { name: "Brandon Smith", title: "Licensed in Virginia and is a member of the National Association of Realtors and Northern Virginia Association of Realtors.", imageUrl: BrandonProfileImg },
     ];
     return (

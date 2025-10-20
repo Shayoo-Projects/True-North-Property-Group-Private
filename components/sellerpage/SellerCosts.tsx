@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const SellerCosts: React.FC = () => {
     const costs = [
         { title: "Mortgage Payoff", description: "Current loan(s) and liens cleared at closing." },
-        { title: "Commissions", description: "Typically 6% (split between listing and buyer agents, negotiable)." },
+        { title: "Commissions", description: "(3% listing, 3% buyer), fully negotiable." },
         { title: "Seller Subsidy", description: "Optional credit to buyer (1–3%) to help with closing costs." },
         { title: "Taxes & Fees", description: "Transfer taxes, title company fees, deed prep, etc." },
         { title: "HOA/Condo Fees", description: "Disclosure/resale packages, prorated dues, capital contributions (if required)." },

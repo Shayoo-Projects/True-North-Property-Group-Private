@@ -11,7 +11,7 @@ const BuyerPricing: React.FC = () => {
                 
                 <div className="max-w-4xl mx-auto bg-[#8B4513] bg-opacity-10 p-8 rounded-lg shadow-md border border-[#8B4513] border-opacity-20">
                     <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                        Our services for buyers are typically free, as our commission is paid by the seller. We'll help you understand all the costs associated with buying a home, from the down payment and closing costs to mortgage pre-approval, so you can make an informed financial decision.
+                        We'll help familiarize you on all the costs associated with buying a home, from the earnest money deposit to closing costs, so when you talk to a lender you are better prepared to go into details to obtain your pre-approval letter and ultimately, your loan.
                     </p>
                     
                     <div className="mt-8 text-center">

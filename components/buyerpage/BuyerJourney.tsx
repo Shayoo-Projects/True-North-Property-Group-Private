@@ -38,6 +38,7 @@ const BuyerJourney: React.FC = () => {
             ),
             steps: [
                 "Submit your offer with pre-approval.",
+                "Contract ratification.",
                 "Provide earnest money deposit (typically 1–2%).",
                 "Coordinate with the title company and lender."
             ]
@@ -50,7 +51,7 @@ const BuyerJourney: React.FC = () => {
                 </svg>
             ),
             steps: [
-                "Schedule home, termite, and radon inspections.",
+                "Schedule home, termite, and various other inspections.",
                 "Review HOA or condo documents (if applicable).",
                 "Appraisal and full loan approval process begins."
             ]

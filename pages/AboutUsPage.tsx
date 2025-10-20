@@ -11,7 +11,7 @@ const AboutUsPage: React.FC = () => {
     <>
       <PageHeader 
         backgroundImage={AboutUsHeaderImg}
-        title={<>About <span className="text-[#00a0b0]">True North</span></>}
+        title={<>About <span className="text-[#00a0b0]">True North Property Group</span></>}
         subtitle="Your trusted guides in the journey of real estate."
       />
       <MissionSection />
